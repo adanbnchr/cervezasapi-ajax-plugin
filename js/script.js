@@ -1,14 +1,10 @@
 $(document).ready(function() {
   /*cookie bar*/
   $.cookieBar({
-      message: 'Usamos cookies',
-      acceptButton: true,
-      acceptText: 'Vale'
-    }
-
-  );
-
-
+    message: 'Usamos cookies',
+    acceptButton: true,
+    acceptText: 'Vale'
+  });
   /*validación de formularios*/
   $("#frmcervezas").validate({
     rules: {
@@ -16,6 +12,21 @@ $(document).ready(function() {
         required: true,
         minlength: 5
       }
+    },
+    submitHandler: function(form) {
+      $.ajax({
+          url: 'http://localhost:8080/api/cervezas',
+          type: 'POST',
+          dataType: 'json',
+          data: $(form).serialize()
+        })
+        .done(function() {
+          toastr.success('Fenomenal!', 'Eres un monstruo')
+        })
+        .fail(function() {
+          toastr.error('Esto no funciona', 'Repasa el código')
+        });
+      event.preventDefault();
     }
   });
 });
