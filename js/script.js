@@ -1,4 +1,15 @@
 $(document).ready(function() {
+  /*cookie bar*/
+  $.cookieBar({
+      message: 'Usamos cookies',
+      acceptButton: true,
+      acceptText: 'Vale'
+    }
+
+  );
+
+
+  /*validación de formularios*/
   $("#frmcervezas").validate({
     rules: {
       Nombre: {
